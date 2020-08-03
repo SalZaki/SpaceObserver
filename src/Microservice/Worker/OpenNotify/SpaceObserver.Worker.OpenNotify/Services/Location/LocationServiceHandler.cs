@@ -9,8 +9,9 @@
     internal sealed class LocationServiceHandler : ILocationServiceHandler
     {
         private readonly ILogger<LocationServiceHandler> _logger;
+
         private readonly IOpenNotifyService _openNotifyService;
-//        private readonly IEventBus _eventBus;
+        // private readonly IEventBus _eventBus;
 
         public LocationServiceHandler(ILogger<LocationServiceHandler> logger, IOpenNotifyService openNotifyService)
         {
@@ -20,18 +21,10 @@
 
         public async Task GetLocationAsync(CancellationToken cancellationToken)
         {
-            try
+            while (!cancellationToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Player Hosted Service: Updating...");
-
-                while (!cancellationToken.IsCancellationRequested)
-                {
-                    var location = await _openNotifyService.GetIssLocationAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Player Hosted Service: Error while updating players");
+                var location = await _openNotifyService.GetIssLocationAsync().ConfigureAwait(false);
+                //_eventBus.Publish(location);
             }
         }
     }
