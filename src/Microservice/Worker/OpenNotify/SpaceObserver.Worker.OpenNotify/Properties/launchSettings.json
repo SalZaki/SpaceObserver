@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "SpaceObserver.Worker.OpenNotify": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SPACEOBSERVER_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
