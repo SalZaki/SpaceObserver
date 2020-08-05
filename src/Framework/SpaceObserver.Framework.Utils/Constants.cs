@@ -10,6 +10,7 @@
         public static class Configuration
         {
             public const string ApiSettingsSection = "ApiSettings";
+            public const string KafkaSettingsSection = "KafkaSettings";
         }
 
         public class CommonErrorMessage

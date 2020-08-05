@@ -1,13 +1,14 @@
-﻿using Polly;
-using Polly.Extensions.Http;
-
-namespace SpaceObserver.Worker.ISS.Extensions
+﻿namespace SpaceObserver.Worker.ISS.Extensions
 {
     using Infrastructure.OpenNotify;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
 
+    using Polly;
+    using Polly.Extensions.Http;
+
+    using SpaceObserver.Infrastructure.Bus.Kafka.Extensions;
     using Services.Location;
     using System;
 
@@ -19,6 +20,7 @@ namespace SpaceObserver.Worker.ISS.Extensions
         {
             return services
                 .AddWorkerSettings()
+                .AddKafkaSettings()
                 .AddOpenNotifySettings();
         }
 

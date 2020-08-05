@@ -9,5 +9,10 @@
         {
             return config.GetSection(Constants.Configuration.ApiSettingsSection);
         }
+
+        public static IConfigurationSection GetKafkaSettingsConfigSection(this IConfiguration config)
+        {
+            return config.GetSection(Constants.Configuration.KafkaSettingsSection);
+        }
     }
 }

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.11.4" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpaceObserver.Framework.Domain\SpaceObserver.Framework.Domain.csproj" />
+  </ItemGroup>
+</Project>

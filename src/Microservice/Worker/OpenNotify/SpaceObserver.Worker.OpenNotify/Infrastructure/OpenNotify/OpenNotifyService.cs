@@ -1,8 +1,7 @@
 ﻿namespace SpaceObserver.Worker.ISS.Infrastructure.OpenNotify
 {
-    using Dtos;
-    using Framework.JsonConverters;
     using Microsoft.Extensions.Logging;
+    using Framework.JsonConverters;
     using System;
     using System.Net.Http;
     using System.Text.Encodings.Web;
@@ -36,14 +35,16 @@
             _serializerOptions.Converters.Add(new JsonStringDoubleConverter());
         }
 
-        public async Task<LocationDto> GetIssLocationAsync()
+        public async Task<string> GetLocationAsync()
         {
             using var httpClient = _httpClientFactory.CreateClient(_settings.Name);
-            var response = await httpClient.GetAsync($"{_settings.IssLocationEndpoint}");
-            response.EnsureSuccessStatusCode();
+            var responseMessage = await httpClient.GetAsync($"{_settings.IssLocationEndpoint}");
 
-            await using var responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            return await JsonSerializer.DeserializeAsync<LocationDto>(responseStream, _serializerOptions);
+            responseMessage.EnsureSuccessStatusCode();
+
+            var response = await responseMessage.Content.ReadAsStringAsync();
+
+            return response;
         }
     }
 }

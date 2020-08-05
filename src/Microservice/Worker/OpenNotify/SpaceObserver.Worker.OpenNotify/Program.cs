@@ -1,3 +1,7 @@
+using MediatR;
+using SpaceObserver.Framework.Bus.Extensions;
+using SpaceObserver.Framework.Extensions;
+
 namespace SpaceObserver.Worker.ISS
 {
     using Extensions;
@@ -6,6 +10,7 @@ namespace SpaceObserver.Worker.ISS
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using SpaceObserver.Infrastructure.Bus.Kafka.Extensions;
 
     using Serilog;
     using System.IO;
@@ -66,6 +71,9 @@ namespace SpaceObserver.Worker.ISS
                 .ConfigureServices(services =>
                 {
                     services.AddSettings();
+                    services.AddMediator(typeof(Program));
+                    services.AddKafkaCommandBus();
+                    services.AddDomainCommandDispatcher();
                     services.AddServiceHandlers();
                     services.AddInfrastructureServices();
                     services.AddLocationBackgroundService();
